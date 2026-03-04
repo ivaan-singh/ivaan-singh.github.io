@@ -659,6 +659,83 @@ footer {
   .stat-name { display: none; }
   footer { padding: 32px 24px; flex-direction: column; gap: 12px; text-align: center; }
 }
+/* VIEW CODE BANNER */
+.code-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 48px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: background 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.code-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0,255,178,0.04), rgba(77,159,255,0.04));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.code-banner:hover { border-color: var(--accent); }
+.code-banner:hover::before { opacity: 1; }
+
+.code-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.code-banner-icon {
+  font-size: 32px;
+  color: var(--accent);
+  opacity: 0.6;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.code-banner-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--text);
+  letter-spacing: -0.5px;
+  transition: color 0.2s;
+}
+
+.code-banner:hover .code-banner-title { color: var(--accent); }
+
+.code-banner-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--muted2);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.code-banner-arrow {
+  font-size: 32px;
+  color: var(--accent);
+  opacity: 0.4;
+  transition: opacity 0.2s, transform 0.2s;
+  font-family: 'Syne', sans-serif;
+}
+
+.code-banner:hover .code-banner-arrow {
+  opacity: 1;
+  transform: translateX(6px);
+}
+
+@media (max-width: 900px) {
+  .code-banner { padding: 24px; }
+  .code-banner-title { font-size: 22px; }
+}
 </style>
 </head>
 <body>
@@ -1012,6 +1089,20 @@ footer {
     <div class="quote-attr">— My Dad</div>
   </div>
 </section>
+
+<!-- VIEW CODE BANNER -->
+<a href="https://github.com/ivaan-singh/ivaan-singh.github.io.git" target="_blank" class="code-banner">
+  <div class="code-banner-left">
+    <span class="code-banner-icon">⌥</span>
+    <div>
+      <div class="code-banner-title">View Code</div>
+      <div class="code-banner-sub">github.com/ivaan-singh</div>
+    </div>
+  </div>
+  <div class="code-banner-right">
+    <span class="code-banner-arrow">→</span>
+  </div>
+</a>
 
 <!-- FOOTER -->
 <footer>
