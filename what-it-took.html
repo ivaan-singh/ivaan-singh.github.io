@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What it Took</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #05070d;
+  --surface: #0b0e18;
+  --border: #1c2035;
+  --accent: #00ffb2;
+  --accent2: #4d9fff;
+  --gold: #ffd166;
+  --text: #e2e8f8;
+  --muted: #4a5270;
+  --muted2: #8892b0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(0,255,178,0.4);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.15s ease;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,255,178,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,178,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 99px; }
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(5,7,13,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(28,32,53,0.6);
+}
+
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.nav-back {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--accent); }
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 140px 48px 100px;
+}
+
+.page-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.1s forwards;
+}
+
+.page-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 7vw, 80px);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 64px;
+  opacity: 0;
+  animation: fadeUp 0.5s ease 0.2s forwards;
+}
+
+.took-row {
+  padding: 40px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeUp 0.5s ease forwards;
+}
+
+.took-row:nth-child(1) { animation-delay: 0.3s; }
+.took-row:nth-child(2) { animation-delay: 0.45s; }
+.took-row:nth-child(3) { animation-delay: 0.6s; }
+
+.took-row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.took-label {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--text);
+}
+
+.reveal-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted2);
+  cursor: none;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.reveal-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0,255,178,0.05);
+}
+.reveal-btn.revealed {
+  border-color: var(--accent);
+  color: var(--bg);
+  background: var(--accent);
+  font-weight: 700;
+  cursor: default;
+}
+
+.counter-display {
+  display: none;
+  margin-top: 28px;
+}
+
+.counter-value {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(56px, 10vw, 112px);
+  letter-spacing: -3px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.counter-suffix {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.reveal-content {
+  display: none;
+  margin-top: 28px;
+}
+
+.reveal-content ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reveal-content ul li {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--muted2);
+  padding: 14px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.reveal-content ul li:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+.reveal-content ul li::before {
+  content: '▸';
+  color: var(--accent);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.reveal-content ul li a {
+  color: var(--accent2);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(77,159,255,0.3);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.reveal-content ul li a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 64px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.back-link:hover { color: var(--accent); border-color: var(--accent); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  nav { padding: 16px 24px; }
+  main { padding: 120px 24px 80px; }
+  .took-label { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="nav-logo">// What it Took</div>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<main>
+  <div class="page-label">// Behind the build</div>
+  <h1 class="page-title">What it Took.</h1>
+
+  <!-- Lines of Code -->
+  <div class="took-row">
+    <div class="took-row-header">
+      <span class="took-label">Total Lines of Code:</span>
+      <button class="reveal-btn" id="btnLines" onclick="revealLines()">Reveal</button>
+    </div>
+    <div class="counter-display" id="counterDisplay">
+      <div class="counter-value" id="counterVal">0</div>
+      <div class="counter-suffix">lines across 2 files</div>
+    </div>
+  </div>
+
+  <!-- Languages -->
+  <div class="took-row">
+    <div class="took-row-header">
+      <span class="took-label">Coding Languages Used:</span>
+      <button class="reveal-btn" id="btnLangs" onclick="revealContent('langs', 'btnLangs')">Reveal</button>
+    </div>
+    <div class="reveal-content" id="langs">
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Tools -->
+  <div class="took-row">
+    <div class="took-row-header">
+      <span class="took-label">Tools Used:</span>
+      <button class="reveal-btn" id="btnTools" onclick="revealContent('tools', 'btnTools')">Reveal</button>
+    </div>
+    <div class="reveal-content" id="tools">
+      <ul>
+        <li>Code Writing Tool — <a href="https://onecompiler.com" target="_blank">OneCompiler</a></li>
+        <li>Software Compiler — <a href="https://github.com/ivaan-singh/ivaan-singh.github.io" target="_blank">GitHub</a></li>
+        <li>Text Modifier Tool — ChatGPT</li>
+        <li>Vibe Coding Tool — <a href="https://claude.ai" target="_blank">Claude</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to main site</a>
+</main>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx - 4 + 'px';
+    cursor.style.top = my - 4 + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx - 16 + 'px';
+    ring.style.top = ry - 16 + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  function revealLines() {
+    const btn = document.getElementById('btnLines');
+    const display = document.getElementById('counterDisplay');
+    const val = document.getElementById('counterVal');
+
+    btn.classList.add('revealed');
+    btn.textContent = 'Revealed';
+    btn.disabled = true;
+    display.style.display = 'block';
+
+    const target = 1570;
+    const duration = 2000;
+    const start = performance.now();
+
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      val.textContent = Math.floor(eased * target).toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+      else val.textContent = target.toLocaleString();
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  function revealContent(id, btnId) {
+    const content = document.getElementById(id);
+    const btn = document.getElementById(btnId);
+
+    btn.classList.add('revealed');
+    btn.textContent = 'Revealed';
+    btn.disabled = true;
+    content.style.display = 'block';
+
+    const items = content.querySelectorAll('li');
+    items.forEach((item, i) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateX(-12px)';
+      item.style.transition = `opacity 0.3s ease ${i * 0.1}s, transform 0.3s ease ${i * 0.1}s`;
+      setTimeout(() => {
+        item.style.opacity = '1';
+        item.style.transform = 'translateX(0)';
+      }, 20);
+    });
+  }
+</script>
+</body>
+</html>
