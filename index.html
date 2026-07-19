@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ivaan Singh, the Prodigy</title>
+<link rel="icon" href="data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://w3.org&quot; viewBox=&quot;0 0 32 32&quot;&gt;&lt;rect width=&quot;32&quot; height=&quot;32&quot; rx=&quot;6&quot; fill=&quot;%23000000&quot;/&gt;&lt;text x=&quot;50%&quot; y=&quot;55%&quot; dominant-baseline=&quot;middle&quot; text-anchor=&quot;middle&quot; font-family=&quot;system-ui, sans-serif&quot; font-weight=&quot;900&quot; font-size=&quot;14&quot; fill=&quot;%23FFFFFF&quot;&gt;IS&lt;/text&gt;&lt;/svg&gt;">
   
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Syne:wght@400;700;800&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -570,6 +571,162 @@ section {
 .badge-active { background: rgba(0,255,178,0.08); color: var(--accent); border: 1px solid rgba(0,255,178,0.2); }
 .badge-notable { background: rgba(77,159,255,0.08); color: var(--accent2); border: 1px solid rgba(77,159,255,0.2); }
 
+
+
+/* MILESTONES */
+#milestones {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(0,255,178,0.12), transparent 28%),
+    radial-gradient(circle at 82% 16%, rgba(77,159,255,0.12), transparent 32%),
+    linear-gradient(180deg, #05070d 0%, #090d17 100%);
+  overflow: hidden;
+}
+
+#milestones::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  pointer-events: none;
+}
+
+.milestones-header {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.milestones-intro {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted2);
+  max-width: 680px;
+  margin: -24px 0 46px;
+}
+
+.milestone-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.milestone-card {
+  position: relative;
+  min-height: 390px;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    rgba(5,7,13,0.92);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.milestone-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, rgba(0,255,178,0.28), transparent 34%, rgba(77,159,255,0.22));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.milestone-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0,255,178,0.55);
+  box-shadow: 0 32px 90px rgba(0,255,178,0.10), 0 24px 70px rgba(0,0,0,0.45);
+}
+
+.milestone-card:hover::before { opacity: 1; }
+
+.milestone-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.milestone-rank {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.milestone-scale,
+.milestone-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.milestone-scale { color: var(--accent); }
+.milestone-code { color: rgba(226,232,248,0.42); }
+
+.milestone-image {
+  width: 86px;
+  height: 86px;
+  margin-bottom: 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.13);
+  background: rgba(255,255,255,0.04);
+  object-fit: cover;
+  box-shadow: inset 0 0 32px rgba(255,255,255,0.04), 0 0 38px rgba(0,255,178,0.08);
+}
+
+.milestone-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1;
+  letter-spacing: -0.8px;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.milestone-result {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.milestone-desc {
+  color: var(--muted2);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: auto;
+}
+
+.milestone-card.featured {
+  border-color: rgba(255,209,102,0.34);
+  background:
+    linear-gradient(145deg, rgba(255,209,102,0.12), rgba(0,255,178,0.04) 42%, rgba(255,255,255,0.02)),
+    rgba(5,7,13,0.95);
+}
+
+@media (max-width: 900px) {
+  .milestone-grid { grid-template-columns: 1fr; }
+  .milestone-card { min-height: 0; }
+  .milestones-intro { margin-top: -16px; }
+}
+
 /* PHILOSOPHY */
 .philosophy-inner {
   max-width: 800px;
@@ -751,6 +908,7 @@ footer {
     <li><a href="#about">About</a></li>
     <li><a href="#pov">POV</a></li>
     <li><a href="#stats">Stats</a></li>
+    <li><a href="#milestones">Milestones</a></li>
     <li><a href="#achievements">Wins</a></li>
     <li><a href="#links">Projects</a></li>
     <li><a href="#philosophy">Philosophy</a></li>
@@ -945,9 +1103,60 @@ footer {
   <p class="stats-note">* Percentiles are self-assessed based on competition results, international rankings, and real outcomes.</p>
 </section>
 
+
+<!-- MILESTONES -->
+<section id="milestones" aria-labelledby="milestones-title">
+  <div class="milestones-header reveal">
+    <div class="section-label">// 04 — Milestones</div>
+    <h2 class="section-title" id="milestones-title">Global-scale wins.</h2>
+    <p class="milestones-intro">A premium snapshot of my biggest Codeavour competitive milestones, ordered by global scale and designed for fast scanning by visitors, search engines, and answer engines.</p>
+  </div>
+
+  <div class="milestone-grid">
+    <article class="milestone-card featured reveal">
+      <div class="milestone-content">
+        <div class="milestone-rank">
+          <span class="milestone-scale">Global</span>
+          <span class="milestone-code">01 / 03</span>
+        </div>
+        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%23ffd166' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%23ffd166'&gt;1&lt;/text&gt;&lt;/svg&gt;" alt="Codeavour International Champion trophy placeholder for Ivaan Singh, 1st Place Globally">
+        <h3>Codeavour International Champion</h3>
+        <p class="milestone-result">1st Place Globally</p>
+        <p class="milestone-desc">The headline achievement: an international Codeavour championship win that places Ivaan at the top of the global competitive field.</p>
+      </div>
+    </article>
+
+    <article class="milestone-card reveal">
+      <div class="milestone-content">
+        <div class="milestone-rank">
+          <span class="milestone-scale">National</span>
+          <span class="milestone-code">02 / 03</span>
+        </div>
+        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%234d9fff' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%234d9fff'&gt;2&lt;/text&gt;&lt;/svg&gt;" alt="Codeavour National Championship medal placeholder for Ivaan Singh, 2nd Place">
+        <h3>Codeavour National Championship</h3>
+        <p class="milestone-result">2nd Place</p>
+        <p class="milestone-desc">A national podium finish that showcases consistency, technical depth, and execution under high-pressure competition.</p>
+      </div>
+    </article>
+
+    <article class="milestone-card reveal">
+      <div class="milestone-content">
+        <div class="milestone-rank">
+          <span class="milestone-scale">Regional</span>
+          <span class="milestone-code">03 / 03</span>
+        </div>
+        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%2300ffb2' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%2300ffb2'&gt;1&lt;/text&gt;&lt;/svg&gt;" alt="Codeavour Regional Championship award placeholder for Ivaan Singh, 1st Place">
+        <h3>Codeavour Regional Championship</h3>
+        <p class="milestone-result">1st Place</p>
+        <p class="milestone-desc">A regional Codeavour win that established the path toward national recognition and international championship performance.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- ACHIEVEMENTS -->
 <section id="achievements">
-  <div class="section-label">// 04 — Achievements</div>
+  <div class="section-label">// 05 — Achievements</div>
   <div class="section-title">The receipts.</div>
   <p class="achievements-intro">Not participation trophies. Actual results, across actual competitions, in actual different domains.</p>
 
@@ -1050,7 +1259,7 @@ footer {
 
 <!-- LINKS -->
 <section id="links">
-  <div class="section-label">// 05 — Projects</div>
+  <div class="section-label">// 06 — Projects</div>
   <div class="section-title">Built by me.</div>
   <p class="achievements-intro">Websites I've made. More coming.</p>
 
@@ -1081,7 +1290,7 @@ footer {
 
 <!-- PHILOSOPHY -->
 <section id="philosophy">
-  <div class="section-label">// 06 — Philosophy</div>
+  <div class="section-label">// 07 — Philosophy</div>
   <div class="section-title">The strategy.</div>
   <div class="philosophy-inner reveal">
     <div class="big-quote">Being diligent is better than being intelligent.</div>
