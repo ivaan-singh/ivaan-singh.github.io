@@ -25,11 +25,18 @@
   --accent3: #ff4f6d;
   --gold: #ffd166;
   --text: #e2e8f8;
-  --muted: #4a5270;
-  --muted2: #8892b0;
+  --muted: #687394;
+  --muted2: #a0aac4;
 }
 
 html { scroll-behavior: smooth; }
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #00f0ff;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 18px rgba(0, 240, 255, 0.55);
+  transition: outline-offset 0.2s ease, box-shadow 0.2s ease;
+}
 
 body {
   background: var(--bg);
@@ -472,7 +479,7 @@ section {
 .stats-note {
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
-  color: var(--muted);
+  color: #e0e0e0;
   margin-top: 24px;
   letter-spacing: 1px;
   font-style: italic;
@@ -782,7 +789,7 @@ footer {
 .footer-left {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px;
-  color: var(--muted2);
+  color: #e0e0e0;
   font-style: italic;
 }
 
@@ -791,7 +798,7 @@ footer {
   font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #e0e0e0;
 }
 
 /* ANIMATIONS */
@@ -913,7 +920,7 @@ footer {
     <li><a href="#about">About</a></li>
     <li><a href="#pov">POV</a></li>
     <li><a href="#stats">Stats</a></li>
-    <li><a href="#milestones">Milestones</a></li>
+    <li><a href="#milestones">Codeavour</a></li>
     <li><a href="#achievements">Wins</a></li>
     <li><a href="#links">Projects</a></li>
     <li><a href="#philosophy">Philosophy</a></li>
@@ -1005,8 +1012,8 @@ footer {
   <p class="stats-intro">These aren't estimates. These are backed by competition results, international rankings, and real outcomes. Toggle between how I stack up globally and against people my age.</p>
 
   <div class="stats-toggle">
-    <button class="toggle-btn active" onclick="switchTab('global', this)">Global</button>
-    <button class="toggle-btn" onclick="switchTab('relative', this)">Age-Relative</button>
+    <button class="toggle-btn active" type="button" aria-controls="statsGlobal" aria-pressed="true" onclick="switchTab('global', this)">Global</button>
+    <button class="toggle-btn" type="button" aria-controls="statsRelative" aria-pressed="false" onclick="switchTab('relative', this)">Age-Relative</button>
   </div>
 
   <div class="stat-rows" id="statsGlobal">
@@ -1112,9 +1119,9 @@ footer {
 <!-- MILESTONES -->
 <section id="milestones" aria-labelledby="milestones-title">
   <div class="milestones-header reveal">
-    <div class="section-label">// 04 — Milestones</div>
-    <h2 class="section-title" id="milestones-title">Global-scale wins.</h2>
-    <p class="milestones-intro">A premium snapshot of my biggest Codeavour competitive milestones, ordered by global scale and designed for fast scanning by visitors, search engines, and answer engines.</p>
+    <div class="section-label">// 04 — Codeavour</div>
+    <h2 class="section-title" id="milestones-title">My biggest achievement.</h2>
+    <p class="milestones-intro">Codeavour is the achievement I am proudest of—a journey from regional champion to a national podium and, ultimately, 1st place in the world.</p>
   </div>
 
   <div class="milestone-grid">
@@ -1124,7 +1131,7 @@ footer {
           <span class="milestone-scale">Global</span>
           <span class="milestone-code">01 / 03</span>
         </div>
-        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%23ffd166' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%23ffd166'&gt;1&lt;/text&gt;&lt;/svg&gt;" alt="Codeavour International Champion trophy placeholder for Ivaan Singh, 1st Place Globally">
+        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%23ffd166' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%23ffd166'&gt;1&lt;/text&gt;&lt;/svg&gt;" alt="Gold number one emblem for Ivaan Singh's Codeavour international championship">
         <h3>Codeavour International Champion</h3>
         <p class="milestone-result">1st Place Globally</p>
         <p class="milestone-desc">The headline achievement: an international Codeavour championship win that places Ivaan at the top of the global competitive field.</p>
@@ -1137,7 +1144,7 @@ footer {
           <span class="milestone-scale">National</span>
           <span class="milestone-code">02 / 03</span>
         </div>
-        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%234d9fff' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%234d9fff'&gt;2&lt;/text&gt;&lt;/svg&gt;" alt="Codeavour National Championship medal placeholder for Ivaan Singh, 2nd Place">
+        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%234d9fff' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%234d9fff'&gt;2&lt;/text&gt;&lt;/svg&gt;" alt="Blue number two emblem for Ivaan Singh's Codeavour national podium finish">
         <h3>Codeavour National Championship</h3>
         <p class="milestone-result">2nd Place</p>
         <p class="milestone-desc">A national podium finish that showcases consistency, technical depth, and execution under high-pressure competition.</p>
@@ -1150,7 +1157,7 @@ footer {
           <span class="milestone-scale">Regional</span>
           <span class="milestone-code">03 / 03</span>
         </div>
-        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%2300ffb2' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%2300ffb2'&gt;1&lt;/text&gt;&lt;/svg&gt;" alt="Codeavour Regional Championship award placeholder for Ivaan Singh, 1st Place">
+        <img class="milestone-image" src="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'&gt;&lt;rect width='96' height='96' rx='22' fill='%2305070d'/&gt;&lt;circle cx='48' cy='48' r='30' fill='%2300ffb2' opacity='.18'/&gt;&lt;text x='48' y='57' text-anchor='middle' font-family='Arial' font-size='30' font-weight='900' fill='%2300ffb2'&gt;1&lt;/text&gt;&lt;/svg&gt;" alt="Neon green number one emblem for Ivaan Singh's Codeavour regional championship">
         <h3>Codeavour Regional Championship</h3>
         <p class="milestone-result">1st Place</p>
         <p class="milestone-desc">A regional Codeavour win that established the path toward national recognition and international championship performance.</p>
@@ -1182,9 +1189,9 @@ footer {
       </div>
       <div class="ach-card">
         <div class="ach-card-title">Codeavour 7.0</div>
-        <div class="ach-card-result">⚡ Currently Competing</div>
-        <div class="ach-card-desc">One of the biggest global AI & coding challenges. Still in it.</div>
-        <span class="ach-badge badge-active">Live</span>
+        <div class="ach-card-result">🥇 1st in the World</div>
+        <div class="ach-card-desc">Took the top spot in one of the biggest global AI & coding challenges.</div>
+        <span class="ach-badge badge-gold">Gold</span>
       </div>
     </div>
   </div>
@@ -1274,21 +1281,21 @@ footer {
       <div class="ach-card-result">Personal Hub</div>
       <div class="ach-card-desc">My main site. The home base. Everything links from here.</div>
       <br>
-      <a href="https://ivaansingh.com/" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(0,255,178,0.3);padding-bottom:2px;">Visit →</a>
+      <a href="https://ivaansingh.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit the ivaansingh.com personal hub (opens in a new tab)" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(0,255,178,0.3);padding-bottom:2px;">Visit →</a>
     </div>
     <div class="ach-card">
       <div class="ach-card-title">Renewable & Non-Renewable Energy</div>
       <div class="ach-card-result">Educational Site</div>
       <div class="ach-card-desc">A full educational breakdown of energy sources — renewable vs non-renewable. Built and structured from scratch.</div>
       <br>
-      <a href="https://ivaansingh.com/renewable-non-renewable-energy/index.html" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(0,255,178,0.3);padding-bottom:2px;">Visit →</a>
+      <a href="https://ivaansingh.com/renewable-non-renewable-energy/index.html" target="_blank" rel="noopener noreferrer" aria-label="Visit the Renewable and Non-Renewable Energy project (opens in a new tab)" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(0,255,178,0.3);padding-bottom:2px;">Visit →</a>
     </div>
     <div class="ach-card">
       <div class="ach-card-title">All About Me</div>
       <div class="ach-card-result">First Site — The Origin</div>
       <div class="ach-card-desc">The first website I ever built. Where it started. Proof that everyone has a page zero.</div>
       <br>
-      <a href="https://ii7trf.mimo.run/index.html" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(0,255,178,0.3);padding-bottom:2px;">Visit →</a>
+      <a href="https://ii7trf.mimo.run/index.html" target="_blank" rel="noopener noreferrer" aria-label="Visit the All About Me project (opens in a new tab)" style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(0,255,178,0.3);padding-bottom:2px;">Visit →</a>
     </div>
   </div>
 </section>
@@ -1369,8 +1376,12 @@ footer {
 
   // Stats toggle
   function switchTab(tab, btn) {
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.toggle-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-pressed', 'false');
+    });
     btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
     const g = document.getElementById('statsGlobal');
     const r = document.getElementById('statsRelative');
     if (tab === 'global') {
