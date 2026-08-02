@@ -23,6 +23,13 @@
 
 html { scroll-behavior: smooth; }
 
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #00f0ff;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 18px rgba(0, 240, 255, 0.55);
+  transition: outline-offset 0.2s ease, box-shadow 0.2s ease;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -300,7 +307,7 @@ main {
   <div class="took-row">
     <div class="took-row-header">
       <span class="took-label">Total Lines of Code:</span>
-      <button class="reveal-btn" id="btnLines" onclick="revealLines()">Reveal</button>
+      <button class="reveal-btn" id="btnLines" type="button" aria-controls="counterDisplay" aria-expanded="false" onclick="revealLines()">Reveal</button>
     </div>
     <div class="counter-display" id="counterDisplay">
       <div class="counter-value" id="counterVal">0</div>
@@ -312,7 +319,7 @@ main {
   <div class="took-row">
     <div class="took-row-header">
       <span class="took-label">Coding Languages Used:</span>
-      <button class="reveal-btn" id="btnLangs" onclick="revealContent('langs', 'btnLangs')">Reveal</button>
+      <button class="reveal-btn" id="btnLangs" type="button" aria-controls="langs" aria-expanded="false" onclick="revealContent('langs', 'btnLangs')">Reveal</button>
     </div>
     <div class="reveal-content" id="langs">
       <ul>
@@ -327,14 +334,14 @@ main {
   <div class="took-row">
     <div class="took-row-header">
       <span class="took-label">Tools Used:</span>
-      <button class="reveal-btn" id="btnTools" onclick="revealContent('tools', 'btnTools')">Reveal</button>
+      <button class="reveal-btn" id="btnTools" type="button" aria-controls="tools" aria-expanded="false" onclick="revealContent('tools', 'btnTools')">Reveal</button>
     </div>
     <div class="reveal-content" id="tools">
       <ul>
-        <li>Code Writing Tool — <a href="https://onecompiler.com" target="_blank">OneCompiler</a></li>
-        <li>Software Compiler — <a href="https://github.com/ivaan-singh/ivaan-singh.github.io" target="_blank">GitHub</a></li>
-        <li>Text Modifier Tool — <a href="https://chatgpt.com/" target="_blank">ChatGPT</a></li>
-        <li>Vibe Coding Tool — <a href="https://claude.ai" target="_blank">Claude</a></li>
+        <li>Code Writing Tool — <a href="https://onecompiler.com" target="_blank" rel="noopener noreferrer">OneCompiler</a></li>
+        <li>Software Compiler — <a href="https://github.com/ivaan-singh/ivaan-singh.github.io" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li>Text Modifier Tool — <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a></li>
+        <li>Vibe Coding Tool — <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude</a></li>
       </ul>
     </div>
   </div>
@@ -369,6 +376,7 @@ main {
 
     btn.classList.add('revealed');
     btn.textContent = 'Revealed';
+    btn.setAttribute('aria-expanded', 'true');
     btn.disabled = true;
     display.style.display = 'block';
 
@@ -394,6 +402,7 @@ main {
 
     btn.classList.add('revealed');
     btn.textContent = 'Revealed';
+    btn.setAttribute('aria-expanded', 'true');
     btn.disabled = true;
     content.style.display = 'block';
 
